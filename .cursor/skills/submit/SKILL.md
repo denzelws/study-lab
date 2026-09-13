@@ -74,6 +74,9 @@ Table or bullets: 3–5 hidden scenarios, whether the user's code handles each (
 - Brief walkthrough tied to A/B/C or the core pattern.
 - State optimal Big-O.
 
+### 5. Log-hint Reminder
+- End your response with exactly this question: *"Deseja extrair as lições deste exercício para o `hints.md`? Responda `/log-hint` ou apenas `s`."*
+
 ## Rules
 
 - **Medium/Harder integrity:** grading is allowed; do not re-teach during the grade unless the score section references a fix.
