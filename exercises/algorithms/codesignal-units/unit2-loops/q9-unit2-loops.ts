@@ -23,15 +23,13 @@
  */
 
 function buildDashedPath(stops: string[]): string {
-  // Return - between string
   let result = ""
+  let first = true
 
   for (const s of stops) {
-    if (result === "") {
-      result += s
-    } else {
-      result += "-" + s
-    }
+    if (!first) result += "-"
+    result += s
+    first = false
   }
 
   return result;
@@ -43,3 +41,4 @@ console.log("Test 1:", buildDashedPath(["a", "b", "c"])); // Expected: "a-b-c"
 console.log("Test 2:", buildDashedPath(["x"])); // Expected: "x"
 console.log("Test 3:", buildDashedPath([])); // Expected: ""
 console.log("Test 4:", buildDashedPath(["2024", "09", "12"])); // Expected: "2024-09-12"
+console.log("Test 5:", buildDashedPath(["", "b"])); // Expected: "-b"

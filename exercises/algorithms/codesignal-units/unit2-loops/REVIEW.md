@@ -11,7 +11,7 @@
 | :--- | :--- | :--- | :--- |
 | 1 | **`.includes()` invertido** — o item pergunta sobre a lista | Q6, Q10 | A **lista** chama `.includes(item)` |
 | 2 | **Checar string inteira** em vez de um char/posição | Q6, Q10 | Passe só o pedaço: `char` ou `tag[0]!` |
-| 3 | **Valor do input** em vez de **estado do loop** | Q9 (revisão Q2) | `result === ""` ou `let first = true` |
+| 3 | **Valor do input** em vez de **estado do loop** | Q9 (revisão Q2) | `let first = true` (não `arr[0]` nem só `result === ""`) |
 | 4 | **`>` em vez de `>=`** quando “ainda dá para executar 1 vez” | Q5, Q8 | `fuel >= burn`, `size >= threshold` |
 | 5 | **`for...of` quando o output é índice** | Q7 | `for (let i = 0; ...)` + `return i` |
 
@@ -112,10 +112,20 @@ while (size >= threshold) {
 if (s === stops[0]) result += s
 else result += "-" + s
 
-// ✅ Certo — ["a", "a", "b"] → "a-a-b"
+// ⚠️ Parcial — ["a", "a", "b"] ok, mas ["", "b"] → "b" (deveria "-b")
 if (result === "") result += s
 else result += "-" + s
+
+// ✅ Certo — flag booleana (robusto para parada "")
+let first = true
+for (const s of stops) {
+  if (!first) result += "-"
+  result += s
+  first = false
+}
 ```
+
+**⚠️ `result === ""` falha se parada for `""`:** `result += ""` não muda o acumulador → próxima volta acha que ainda é a 1ª (`["", "b"]` → `"b"` ❌).
 
 **⚠️ VALOR ≠ POSIÇÃO (revisão Q2):**
 
@@ -131,7 +141,7 @@ else result += "-" + s
 | 2 | `a` | ✅ de novo! ❌ | `aa` |
 | 3 | `b` | ❌ | `aa-b` |
 
-**Nota do submit:** 88% na 1ª tentativa → corrigido para `result === ""` → 100%.
+**Nota do submit:** 88% na 1ª tentativa (`s === stops[0]`) → `result === ""` passou nos testes visíveis → corrigido para `first` flag (edge case `""`).
 
 ---
 
@@ -171,7 +181,7 @@ if (tag.length >= minLen && letters.includes(tag[0]!)) count++
 
 - [ ] `.includes`: a **lista** está à esquerda? (`vowel.includes(char)`, não o contrário)
 - [ ] Checo **um char** (`tag[0]!`) ou a **string inteira** por engano?
-- [ ] Separador em loop: pergunto sobre **estado** (`result === ""`, `first`) e não `arr[0]`?
+- [ ] Separador em loop: uso **flag `first`** (Q9) ou `result === ""` (Q2 ok se item nunca é `""`) — nunca `arr[0]`?
 - [ ] `while`: usei `>=` quando “ainda cabe 1 ciclo completo”?
 - [ ] `while`: atualizo o estado dentro do loop? (`fuel -= burn`, `size = Math.floor(size/2)`)
 - [ ] Preciso de **índice**? Usei `for` com `i`, não só `for...of`?

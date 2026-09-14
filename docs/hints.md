@@ -62,7 +62,7 @@ Exemplo `["a", "a", "b"]` com `s === stops[0]`:
 - Volta 1: `s="a"` → igual a `stops[0]` → cola sem `-` → `"a"`
 - Volta 2: `s="a"` → igual a `stops[0]` de novo! → cola sem `-` → `"aab"` ❌ (esperado: `"a-a-b"`)
 
-Correto: `result === ""` (estado) ou `let first = true` (flag) — pergunta sobre POSIÇÃO/ESTADO, nunca valor do input.
+Correto: `let first = true` (flag) — pergunta sobre POSIÇÃO/ESTADO, nunca valor do input. `result === ""` funciona no Q2 mas falha no Q9 se parada for `""` (`result += ""` não avança o estado).
 
 Quando usar esse padrão? Q2 (espaço), Q9 (`-`), datas (`2024-09-12`): separador ANTES a partir do 2º item.
 
