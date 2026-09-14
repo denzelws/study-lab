@@ -24,8 +24,18 @@
  */
 
 function stripVowels(text: string): string {
-  // TODO: Implemente a lógica aqui
-  return "";
+  // Traduction: Return string avoiding vowels
+  // A -> No vowels
+  let result = ""
+  let vowel = 'aeiouAEIOU'
+  
+  for (const char of text) {
+    if (!vowel.includes(char)) {
+      result += char
+    }
+  }
+
+  return result;
 }
 
 // --- Manual Test Logs ---

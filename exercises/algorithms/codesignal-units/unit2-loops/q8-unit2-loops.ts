@@ -24,8 +24,15 @@
  */
 
 function halveUntilBelow(size: number, threshold: number): number {
-  // TODO: Implemente a lógica aqui
-  return 0;
+  // Traduction: how many halves until drow below THRESHOLD
+  let days = 0
+
+  while (size >= threshold) {
+    size = Math.floor(size/2)
+    days++
+  }
+
+  return days;
 }
 
 // --- Manual Test Logs ---

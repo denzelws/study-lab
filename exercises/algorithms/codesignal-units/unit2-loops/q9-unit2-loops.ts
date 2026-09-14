@@ -23,8 +23,18 @@
  */
 
 function buildDashedPath(stops: string[]): string {
-  // TODO: Implemente a lógica aqui
-  return "";
+  // Return - between string
+  let result = ""
+
+  for (const s of stops) {
+    if (result === "") {
+      result += s
+    } else {
+      result += "-" + s
+    }
+  }
+
+  return result;
 }
 
 // --- Manual Test Logs ---

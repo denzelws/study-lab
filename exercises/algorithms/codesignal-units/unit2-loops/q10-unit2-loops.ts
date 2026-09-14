@@ -24,8 +24,16 @@
  */
 
 function countLongCapitalizedTags(tags: string[], minLen: number): number {
-  // TODO: Implemente a lógica aqui
-  return 0;
+  // Traduction: Count long tags that -> length >= `minLen` AND first character uppercase (A–Z)
+
+  let count = 0
+  let letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+  for (const tag of tags) {
+    if (tag.length >= minLen && letters.includes(tag[0]!)) count++
+  }
+
+  return count;
 }
 
 // --- Manual Test Logs ---

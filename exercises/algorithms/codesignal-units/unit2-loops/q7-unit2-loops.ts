@@ -24,7 +24,14 @@
  */
 
 function firstUppercaseIndex(text: string): number {
-  // TODO: Implemente a lógica aqui
+  // Traduction: Find index FIRST capital letter or -1
+  for (let i = 0; i < text.length; i++) {
+    const char = text[i]
+
+    if (char === char!.toUpperCase() && char !== char!.toLowerCase()) {
+      return i
+    }
+  }
   return -1;
 }
 
