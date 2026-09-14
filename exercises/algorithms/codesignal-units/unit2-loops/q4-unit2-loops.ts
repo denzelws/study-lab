@@ -23,8 +23,17 @@
  */
 
 function sumEvenIndices(values: number[]): number {
-  // TODO: Implemente a lógica aqui
-  return 0;
+  // Traduction: Sum even index values inside araay
+
+  // Accumulator 
+  let sum = 0
+
+  // For jumping 2 per 2
+  for (let i = 0; i < values.length; i += 2) {
+    sum += values[i]!
+  }
+
+  return sum;
 }
 
 // --- Manual Test Logs ---

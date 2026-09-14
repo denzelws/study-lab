@@ -23,8 +23,27 @@
  */
 
 function countNonVowels(text: string): number {
-  // TODO: Implemente a lógica aqui
-  return 0;
+  // Traduction: Return count consonant values
+  let count = 0;
+
+  for (const char of text) {
+    const lowerChar = char.toLowerCase()
+    const upperChar = char.toUpperCase()
+    
+    // A -> Check if its not letter
+    if (lowerChar === upperChar) {
+      continue
+    }
+
+    // B -< Check if its vowel
+    if ('aeiouAEIOU'.includes(lowerChar)) {
+      continue
+    }
+
+    count++
+  }
+
+  return count;
 }
 
 // --- Manual Test Logs ---

@@ -22,8 +22,17 @@
  */
 
 function joinWordsWithSpaces(words: string[]): string {
-  // TODO: Implemente a lógica aqui
-  return "";
+  // Traduction: Transform in one line string with spaces btw
+  let result = ""
+  for (const text of words) {
+    if (result === "") {
+      result += text
+    } else {
+      result = result + " " + text
+    }
+  }
+
+  return result
 }
 
 // --- Manual Test Logs ---

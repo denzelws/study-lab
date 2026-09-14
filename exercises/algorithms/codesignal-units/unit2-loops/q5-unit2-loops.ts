@@ -24,8 +24,19 @@
  */
 
 function countFuelCycles(fuel: number, burn: number): number {
-  // TODO: Implemente a lógica aqui
-  return 0;
+  // Traduction: Return n value of how many can run before fuel drops
+  // A -> Storage value
+  if (burn <= 0) return 0
+
+  let cycles = 0
+
+  // B -> While subtract
+  while (fuel >= burn ) {
+    fuel -= burn
+    cycles++
+  }
+
+  return cycles;
 }
 
 // --- Manual Test Logs ---
