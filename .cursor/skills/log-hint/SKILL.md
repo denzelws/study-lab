@@ -1,39 +1,40 @@
 ---
 name: log-hint
 description: >-
-  Extracts mental rules, patterns, and technical corrections from the current exercise and appends 
-  them to the hints.md file. Triggered by /log-hint OR when the user simply replies "s", "sim", 
-  "y", or "yes" right after a /submit grading session.
+  Extracts a tactical trap or syntax rule from the current exercise into
+  docs/hints.md. Trigger when the user types /hint, /log-hint, or replies
+  s/sim/y/yes after /submit of a Unit, sprint-final, or non-plan drill.
+  After a plan.md / Semana 0 / gca-replay pattern exercise, use /pattern instead.
 disable-model-invocation: true
 ---
 
-# /log-hint — Automated Spaced Repetition Logger
+# /hint — Tactical log (`docs/hints.md`)
 
-Quando o usuário acionar o comando `/log-hint`, você DEVE atuar como um engenheiro de aprendizado, extraindo a principal lição da sessão atual e documentando-a fisicamente no arquivo de anotações.
+When the user triggers `/hint` or `/log-hint`, extract the main **trap** (syntax, off-by-one, `.includes` direction) into `docs/hints.md`.
+
+## Trigger
+
+- `/hint` or `/log-hint`
+- `s` / `sim` / `y` / `yes` right after `/submit` **only if** the exercise is **not** a `plan.md` pattern drill (Unit, sprint-final, mode drills).
+
+**Do not** use this skill after a Semana 0 / `plan.md` / `gca-replay` day exercise — that is `/pattern` → `docs/patterns/<family>.md`. Never duplicate the same lesson in both places.
 
 ## Instruções de Execução (Agent Mode)
 
-1. **Analisar o Contexto:** 
+1. **Analisar o Contexto:**
    - Leia o exercício atual.
-   - Leia o histórico da conversa (especialmente pedidos de `/stuck` ou erros apontados pelo `/submit`).
-   - Identifique qual foi a maior "armadilha" técnica, erro de sintaxe ou lacuna lógica do usuário.
+   - Leia o histórico (`/stuck`, erros do `/submit`).
+   - Identifique a maior armadilha técnica, erro de sintaxe ou lacuna lógica.
 
-2. **Formatar a Lição:** 
-   Sintetize o aprendizado seguindo EXATAMENTE o padrão visual abaixo. Seja hiper-conciso.
-   - Escreva a "Regra mental" ou o "Padrão" de forma direta.
-   - Especifique "Quando usar esse padrão?".
-   - Utilize exemplos de código de uma linha, se necessário.
+2. **Formatar a Lição:** hiper-conciso. Regra mental + quando usar. Código de uma linha se precisar.
 
-3. **Escrever no Arquivo:**
-   - Adicione o conteúdo formatado ao final do arquivo `docs/hints.md` (crie o arquivo caso ele não exista).
-   - Use o nome do arquivo/exercício como tag de referência (ex: `@q4-unit1`).
+3. **Escrever:** append em `docs/hints.md` (crie se não existir). Tag `@[arquivo]`.
 
 ## Formato de Saída Obrigatório (para o hints.md)
-
-Você deve concatenar no arquivo `docs/hints.md` exatamente nesta estrutura:
 
 ```text
 @[nome-do-arquivo-atual]
 
-Regra mental / Padrão: [Explique a solução do erro ou o padrão, ex: "Piso em 0: Math.max(n, 0)"]
-Quando usar esse padrão? [Ex: "Sempre que um parâmetro numérico tem mínimo válido, impõe o piso numa linha, sem if."]
+Regra mental / Padrão: [solução do erro ou padrão, ex: "Piso em 0: Math.max(n, 0)"]
+Quando usar esse padrão? [ex: "Parâmetro numérico com mínimo válido: piso numa linha, sem if."]
+```

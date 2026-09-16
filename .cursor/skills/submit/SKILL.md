@@ -3,8 +3,9 @@ name: submit
 description: >-
   Grade a completed CodeSignal practice exercise when the user types /submit.
   Runs tests, scores correctness/edge cases/performance/TypeScript craft, summarizes
-  hints used in the session, and presents the optimal solution. Use when the user
-  says /submit, submit, or asks to finish and grade an algo exercise.
+  hints used in the session, and presents the optimal solution. After grading,
+  offer /pattern (plan.md → docs/patterns/) or /hint (tactical → docs/hints.md).
+  Use when the user says /submit, submit, or asks to grade an algo exercise.
 disable-model-invocation: true
 ---
 
@@ -74,8 +75,16 @@ Table or bullets: 3–5 hidden scenarios, whether the user's code handles each (
 - Brief walkthrough tied to A/B/C or the core pattern.
 - State optimal Big-O.
 
-### 5. Log-hint Reminder
-- End your response with exactly this question: *"Deseja extrair as lições deste exercício para o `hints.md`? Responda `/log-hint` ou apenas `s`."*
+### 5. Log reminder (two vias)
+
+End with **one** of these, matching the exercise origin:
+
+- **Plan.md / Semana 0 / gca-replay day drill** (mental model):
+  *"Registrar o padrão? `/pattern` → `docs/patterns/` (modelo mental). Armadilha de sintaxe avulsa? `/hint` → `docs/hints.md`. `s` neste tipo de exercício grava o pattern."*
+- **Unit / sprint-final / drill tático**:
+  *"Registrar a armadilha? `/hint` → `docs/hints.md`. `s` neste tipo grava o hint. Padrão de família do plano? `/pattern`."*
+
+Do not offer only `hints.md`. Do not write the log in the grade itself.
 
 ## Rules
 
