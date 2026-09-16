@@ -35,7 +35,8 @@
     "state": "tsx exercises/state-management/run.ts",
     "react": "tsx exercises/react-fundamentals/run.tsx",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "patterns": "node scripts/serve-patterns.mjs"
   },
   "devDependencies": {
     "tsx": "^4.23.13",
