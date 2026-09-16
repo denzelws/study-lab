@@ -1,0 +1,13 @@
+---
+description: Reta final GCA — enunciado sem decode (simula prova). Não altera units/skills de estudo.
+globs: exercises/algorithms/codesignal-units/sprint-final/**
+alwaysApply: false
+---
+
+# Sprint final: sem decode no arquivo
+
+Quando gerar ou editar exercícios nesta pasta:
+
+- JSDoc = título, enunciado, examples, constraints. Sem `How to Decode This Problem`, Tradução Limpa, Decomposição, Ferramentas TS ou Armadilhas.
+- Decode continua na skill `/codesignal` para units e estudos posteriores.
+- Hidden tests nos `console.log` com `// Expected` continuam obrigatórios.

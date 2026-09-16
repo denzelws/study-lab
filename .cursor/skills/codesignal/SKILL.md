@@ -60,3 +60,6 @@ Quando o usuário acionar esta skill, você DEVE executar os passos abaixo autom
    // Execute via terminal: npx tsx exercises/algorithms/[topic]/q[X]-[topic].ts
    console.log("Test 1:", solution(/* input */)); // Expected: [output]
    console.log("Test 2:", solution(/* input */)); // Expected: [output]
+   ```
+
+   **Exceção (somente reta final):** arquivos em `exercises/algorithms/codesignal-units/sprint-final/` omitem o bloco Decode (prova). Em qualquer outro tópico o bloco permanece obrigatório.
