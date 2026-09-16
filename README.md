@@ -24,6 +24,7 @@ study-lab/
 │   ├── practice/          # Sandbox for mastering TS native methods (filter, slice, etc.)
 │   └── simulations/       # Timed official simulations (CodeSignal Q1-Q4 style)
 ├── docs/                  # System prompts, grading rules, and mental architecture
+├── roadmap/               # Post-mortems and study rhythm (GCA Airbnb notes)
 ├── package.json           # Automation scripts (tsx, vitest)
 └── tsconfig.json          # Strict mode enforcement for TypeScript
 
@@ -37,6 +38,10 @@ To eliminate operational friction and focus entirely on problem-solving, custom 
 * **`/codesignal`**: The Batch Generator. Reads the unit's README and dynamically generates TypeScript challenges perfectly calibrated to the current study level, preventing AI hallucinations.
 * **`/stuck`**: The "Patient Tutor" mode. Analyzes current code and provides surgical explanations and visual dry-runs without revealing the final solution, preserving practical learning.
 * **`/submit`**: The Automated Grader. Evaluates submitted code based on 4 rigorous pillars (Correctness, Edge Cases, Performance, TS Craft), audits the conversation history to measure developer autonomy, and outputs a formal scorecard.
+
+## 📚 Docs
+
+- [roadmap/GCA-AIRBNB-NOTES.md](./roadmap/GCA-AIRBNB-NOTES.md) — padrões reconstruídos da GCA Airbnb (Q1 pairs, Q2 matrix remove, Q3 t-shift) e drills A/B/C
 
 ## 🚀 Execution & Testing
 

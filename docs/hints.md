@@ -77,3 +77,95 @@ Quando usar esse padrão? Q2 (espaço), Q9 (`-`), datas (`2024-09-12`): separado
 Duas condições = `&&` (as DUAS precisam ser true): `tag.length >= minLen && letters.includes(tag[0]!)`. `||` contaria tag longa sem maiúscula.
 
 Quando usar esse padrão? Capstone: loop + acumulador + múltiplos filtros por item. Mesma regra do Q6: lista pergunta sobre o item — mas passe só o char/posição que importa (`tag[0]`), não a string inteira.
+
+**@q1-sprint-final**
+
+*Padrão: Filtrar pelo 1º elemento + join com flag (Q6 + Q9)*
+
+Regra mental / Padrão: Bloquear por 1º elemento = `part.length > 0 && blocked.includes(part[0]!)` + `continue`. Nunca `part[0] === blocked` — compara 1 elemento com a string INTEIRA (`"A" === "ABC...Z"` sempre false). `""` não bloqueia: sem 1º elemento, o guard `length > 0` deixa passar.
+
+Join dos keepers: `let first = true` **antes** do `for` — `if (!first) result += "/"` + `result += part` + `first = false`. Nunca `result += "/" + part` em todo keeper (sobra `/` no início) nem `let first` dentro do loop (reseta cada volta).
+
+Quando usar esse padrão? Filtrar items de array por 1º elemento de uma lista bloqueada e colar o resto com separador: lista `.includes(char)`, flag de posição fora do loop, guard para string vazia.
+
+**@q4-sprint-final**
+
+*Padrão: while com estado que muda + guard anti-loop (Q5/Q8)*
+
+Regra mental / Padrão: `while (bytes >= minimum)` — `>=` porque no valor exato ainda roda 1 ciclo antes de cair abaixo (`(30,10,10)` → 3 dias com `>=`, 2 com `>`). Dentro: atualiza estado (`bytes -= loss`) + contador (`days++`).
+
+⚠️ Guard `loss <= 0` → `return 0` **antes** do `while`, nunca `if (loss > 0)` só dentro do loop. Se `loss === 0`, `bytes` não muda mas `bytes >= minimum` continua true → loop infinito (`(50, 0, 1)`).
+
+Quando usar esse padrão? Contar ciclos/passos até cruzar um limite com `while`: `>=` no limite, atualiza estado dentro, e qualquer parâmetro que pode zerar o progresso (`burn`, `loss`) ganha early return no topo.
+
+**@q8-sprint-final / @q10-sprint-final**
+
+*Padrão: piso + variáveis clampadas (Unit 1 Q8)*
+
+Regra mental / Padrão: `const heads = Math.max(left, 0)` — piso. Depois **toda** conta usa `heads`/`tails`, nunca o parâmetro cru. `if (prefix + suffix >= length)` quebra quando um lado é negativo (`"ABCD", -2, 5` deveria `""`).
+
+Quando usar esse padrão? Drop do início e do fim (array ou string): `Math.max(x, 0)` + `slice(heads, length - tails)` se `heads + tails < length`.
+
+**@q11-sprint-final**
+
+*Padrão: clamp [MIN, MAX] — piso E teto*
+
+Regra mental / Padrão: `const pos = Math.min(Math.max(index, 0), queue.length)`. `Math.min(index, length)` só teto: `-3` continua `-3`. `slice(0, -1)` **não** é “começar do 0” — corta do **fim**. Testes visíveis podem passar; `index = -1` quebra.
+
+Insert imutável: `slice(0, pos)` + ticket + `slice(pos)` — nunca `splice` no input.
+
+Quando usar esse padrão? Índice/posição com mínimo e máximo (insert, página, volume): primeiro `Math.max` (piso), depois `Math.min` (teto). Use só `pos`.
+
+**@q12-sprint-final**
+
+*Padrão: Set — presença, não contagem*
+
+Regra mental / Padrão: `seen.has(id)` → já viu → `return id` (o **valor**, não um `count++`). Senão `seen.add(id)`. Loop acaba → `return -1` (vazio / todos únicos). `-1` é fallback **depois** do `for`, não condição no item.
+
+Quando usar esse padrão? “Primeiro que se repete / já apareceu?” — `Set`. “Quantas vezes?” — `Map`.
+
+**@q13-sprint-final**
+
+*Padrão: Map de frequência + 2º loop sem early return*
+
+Regra mental / Padrão: `freq.set(id, (freq.get(id) ?? 0) + 1)` no 1º `for`. 2º `for` nos valores: `if (times >= 2) count++` — **nunca** `else return count`. Map itera em ordem de inserção: um único no meio/início (`[303, 101, 101]`) dispara o `else` cedo e zera o score nos hidden.
+
+Quando usar esse padrão? Contar distintos com frequência `>= 2` ou `=== 1`: dois passes, `return count` só no fim.
+
+**@q3-block-pair-swap**
+
+*Padrão: loop vs índices fixos + `+=`*
+
+Regra mental / Padrão: A regra **se move** pela string (“cada par”) → loop `i += 2` (Q1/Q2). A regra **aponta** (“posições 0 e 1, depois [2,3] ↔ [4,5]”) → `if` por `n` + `s[4]! + s[5]! + s[2]! + s[3]!`. Não reutilizar o loop Q1 no Q3.
+
+`result + x` calcula e **descarta**. Sempre `result += x`. Guard `n <= 1 return s`. Não esquecer `n === 3` → cola `s[2]`.
+
+Quando usar esse padrão? Enunciado cita índices concretos: Passo 1 nos dois primeiros, Passo 2 conforme tamanho — concatenação pontual, não varrer tudo.
+
+**@q4-reverse-halves**
+
+*Padrão: slice = pedaço contínuo*
+
+Regra mental / Padrão: `mid` aqui é **tesoura**, não âncora (Q2). Nada se repete → sem `for`. `s.slice(mid) + s.slice(0, mid)` = direita + esquerda. `slice(start, end)` — `end` não entra.
+
+Loop = regra repetida. Índices literais = regra aponta. `slice` = “deste índice até aquele, conteúdo intacto”.
+
+Quando usar esse padrão? “Divida no meio / pegue o prefixo / junte dois trechos sem mexer nos chars”.
+
+**@q4b-pair-halves**
+
+*Padrão: Q1 em cada metade + guarda no if, não no for*
+
+Regra mental / Padrão: `slice` corta; Q1 (`i += 2`) só **depois**, em cada pedaço. `for (i + 1 < length)` **pula** o ímpar. Correto: `for (i < length)` + `if (par) troca else cola s[i]`. Não faça `result += originais` e depois os loops (cola duas vezes).
+
+Quando usar esse padrão? “Corte, **depois** aplique a mesma regra em cada segmento”.
+
+**@q6-mirror-reverse**
+
+*Padrão: espelho = loop de trás para frente*
+
+Regra mental / Padrão: Q4 `slice` só **corta**. Q6 a regra **se move**: cada `i` vai para `n - 1 - i`. Equivale a `for (let i = s.length - 1; i >= 0; i--) result += s[i]`. `""` / `"a"` caem sozinhos.
+
+Atalho na prova: `s.split("").reverse().join("")`. String **não** tem `.reverse()`.
+
+Quando usar esse padrão? “Inverta a string / ordem inversa / palíndromo de construção”.
